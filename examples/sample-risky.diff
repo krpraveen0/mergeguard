@@ -1,0 +1,24 @@
+diff --git a/src/payments/refund.py b/src/payments/refund.py
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/payments/refund.py
+@@ -0,0 +1,5 @@
++def process_refund(payment_id: str, amount: int) -> bool:
++    if amount <= 0:
++        return False
++    return bool(payment_id)
++
+diff --git a/package.json b/package.json
+index 2222222..3333333 100644
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,7 @@
+ {
+   "name": "mergeguard-example",
+   "dependencies": {
+-    "example-lib": "1.0.0"
++    "example-lib": "1.0.1",
++    "new-lib": "2.0.0"
+   }
+ }
