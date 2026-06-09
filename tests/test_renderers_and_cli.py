@@ -1,9 +1,14 @@
 import json
+from pathlib import Path
 
 from mergeguard.cli import main
 from mergeguard.engine import MergeGuardEngine
 from mergeguard.renderers.json import render_json
 from mergeguard.renderers.markdown import render_markdown
+from mergeguard.renderers.text import render_text
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_markdown_renderer_matches_report_shape():
@@ -22,8 +27,55 @@ index 0000000..1111111
 
     assert markdown.startswith("## MERGE Review Readiness Report")
     assert "### Overall status: Needs attention" in markdown
+    assert "| Metric | Value |" in markdown
+    assert "| Files changed | 1 |" in markdown
+    assert "| Category | Status | Findings |" in markdown
+    assert "| Risk | Needs attention | 1 |" in markdown
     assert "### Meaning" in markdown
     assert "- **HIGH**: Risk-sensitive terms found: payment, refund." in markdown
+
+
+def test_markdown_renderer_includes_file_paths_for_pr_comments():
+    report = MergeGuardEngine().scan(
+        """diff --git a/package.json b/package.json
+index 1111111..2222222 100644
+--- a/package.json
++++ b/package.json
+@@ -1 +1 @@
+-{}
++{"dependencies": {}}
+""",
+        "Small update.",
+    )
+
+    markdown = render_markdown(report)
+
+    assert "- **WARNING**: Dependency file changed: package.json. (`package.json`)" in markdown
+
+
+def test_sample_report_matches_risky_example_markdown():
+    diff_text = (ROOT / "examples" / "sample-risky.diff").read_text(encoding="utf-8")
+    description = (ROOT / "examples" / "pr-description-weak.md").read_text(
+        encoding="utf-8"
+    )
+    expected_report = (ROOT / "examples" / "sample-report.md").read_text(
+        encoding="utf-8"
+    )
+
+    report = MergeGuardEngine().scan(diff_text, description)
+
+    assert render_markdown(report) == expected_report
+
+
+def test_text_renderer_outputs_plain_text_report():
+    report = MergeGuardEngine().scan("", "")
+
+    text = render_text(report)
+
+    assert text.startswith("MERGE Review Readiness Report")
+    assert "Overall status: Needs attention" in text
+    assert "Stats: 0 files changed, 0 additions, 0 deletions" in text
+    assert "- WARNING: PR description does not clearly explain expected behavior." in text
 
 
 def test_json_renderer_outputs_machine_readable_report():
