@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,8 +7,36 @@ name = "mergeguard"
 version = "0.1.0"
 description = "Deterministic review-readiness checks for AI-assisted pull requests."
 readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 requires-python = ">=3.14"
 dependencies = []
+authors = [
+    { name = "MergeGuard maintainers" },
+]
+keywords = [
+    "ai-assisted-development",
+    "code-review",
+    "governance",
+    "pull-requests",
+    "review-readiness",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Version Control :: Git",
+]
+
+[project.urls]
+Homepage = "https://github.com/krpraveen0/mergeguard"
+Repository = "https://github.com/krpraveen0/mergeguard"
+Issues = "https://github.com/krpraveen0/mergeguard/issues"
+Releases = "https://github.com/krpraveen0/mergeguard/releases"
 
 [dependency-groups]
 dev = [
@@ -17,6 +45,9 @@ dev = [
 
 [project.scripts]
 mergeguard = "mergeguard.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mergeguard*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
