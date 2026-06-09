@@ -1,0 +1,23 @@
+diff --git a/src/display_name.py b/src/display_name.py
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/display_name.py
+@@ -0,0 +1,4 @@
++def format_display_name(raw_name: str) -> str:
++    name = raw_name.strip()
++    return name or "Anonymous"
++
+diff --git a/tests/test_display_name.py b/tests/test_display_name.py
+new file mode 100644
+index 0000000..2222222
+--- /dev/null
++++ b/tests/test_display_name.py
+@@ -0,0 +1,7 @@
++from src.display_name import format_display_name
++
++
++def test_format_display_name_strips_whitespace():
++    assert format_display_name(" Ada ") == "Ada"
++    assert format_display_name("   ") == "Anonymous"
++

@@ -43,6 +43,8 @@ Supported formats:
 - `markdown`
 - `json`
 
+The `markdown` format is designed for GitHub PR comments. It includes a compact status summary, diff stats, and category findings while keeping file paths readable inline.
+
 ## Configuration
 
 All settings are optional. Missing config files and missing keys fall back to deterministic defaults.

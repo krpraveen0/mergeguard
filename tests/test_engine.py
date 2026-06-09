@@ -44,6 +44,18 @@ def test_sample_risky_diff_produces_expected_findings():
     ) in findings
 
 
+def test_sample_safe_diff_with_good_description_is_ready():
+    diff_text = (ROOT / "examples" / "sample-safe.diff").read_text(encoding="utf-8")
+    description = (ROOT / "examples" / "pr-description-good.md").read_text(
+        encoding="utf-8"
+    )
+
+    report = MergeGuardEngine().scan(diff_text, description)
+
+    assert report.overall_status == "Ready"
+    assert report.findings == []
+
+
 def test_source_changes_with_tests_satisfy_evidence_rule():
     diff_text = """diff --git a/src/app.py b/src/app.py
 index 1111111..2222222 100644
