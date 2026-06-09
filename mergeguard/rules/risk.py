@@ -3,15 +3,20 @@
 from __future__ import annotations
 
 from mergeguard.models import Finding, ScanContext
-from mergeguard.rules.base import Rule
+from mergeguard.rules.base import Rule, path_matches_patterns
 
 
 class RiskRule(Rule):
     category = "Risk"
 
     def run(self, context: ScanContext) -> list[Finding]:
+        findings: list[Finding] = []
         chunks: list[str] = []
+        risky_paths: list[str] = []
+
         for changed_file in context.changed_files:
+            if path_matches_patterns(changed_file.path, context.config.risk_paths):
+                risky_paths.append(changed_file.path)
             chunks.extend(
                 [
                     changed_file.path,
@@ -23,16 +28,38 @@ class RiskRule(Rule):
 
         haystack = "\n".join(chunks).lower()
 
-        found_terms = [
-            term for term in context.config.risky_terms if term.lower() in haystack
-        ]
+        found_terms = _unique(
+            [
+                keyword
+                for keyword in context.config.risk_keywords
+                if keyword.lower() in haystack
+            ]
+        )
 
         if found_terms:
-            return [
+            findings.append(
                 self.finding(
                     "HIGH",
                     f"Risk-sensitive terms found: {', '.join(found_terms)}.",
                 )
-            ]
+            )
 
-        return []
+        if risky_paths:
+            findings.append(
+                self.finding(
+                    "HIGH",
+                    f"Risk-sensitive paths changed: {', '.join(_unique(risky_paths))}.",
+                )
+            )
+
+        return findings
+
+
+def _unique(values: list[str]) -> list[str]:
+    seen: set[str] = set()
+    unique_values: list[str] = []
+    for value in values:
+        if value not in seen:
+            seen.add(value)
+            unique_values.append(value)
+    return unique_values

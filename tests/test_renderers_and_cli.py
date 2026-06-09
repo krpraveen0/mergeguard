@@ -54,3 +54,54 @@ def test_cli_scan_outputs_markdown(capsys):
     assert exit_code == 0
     assert "## MERGE Review Readiness Report" in captured.out
     assert "- **WARNING**: Dependency file changed: package.json." in captured.out
+
+
+def test_cli_scan_uses_explicit_config(tmp_path, capsys):
+    diff_path = tmp_path / "sample.diff"
+    description_path = tmp_path / "description.md"
+    config_path = tmp_path / ".mergeguard.yml"
+    diff_path.write_text(
+        """diff --git a/src/payments/settlement.py b/src/payments/settlement.py
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/payments/settlement.py
+@@ -0,0 +1,2 @@
++def settle():
++    return "wire-transfer"
+""",
+        encoding="utf-8",
+    )
+    description_path.write_text("Small update.", encoding="utf-8")
+    config_path.write_text(
+        """
+risk_paths:
+  - src/payments/**
+risk_keywords:
+  - wire-transfer
+""".strip(),
+        encoding="utf-8",
+    )
+
+    exit_code = main(
+        [
+            "scan",
+            "--diff",
+            str(diff_path),
+            "--description",
+            str(description_path),
+            "--format",
+            "markdown",
+            "--config",
+            str(config_path),
+        ]
+    )
+
+    captured = capsys.readouterr()
+
+    assert exit_code == 0
+    assert "- **HIGH**: Risk-sensitive terms found: wire-transfer." in captured.out
+    assert (
+        "- **HIGH**: Risk-sensitive paths changed: src/payments/settlement.py."
+        in captured.out
+    )

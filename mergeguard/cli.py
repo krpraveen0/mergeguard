@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 from typing import Callable, Optional
 
+from mergeguard.config import ConfigError, load_config
 from mergeguard.engine import MergeGuardEngine
 from mergeguard.renderers import render_json, render_markdown, render_text
 
@@ -37,6 +38,10 @@ def build_parser() -> argparse.ArgumentParser:
         default="text",
         help="Output format.",
     )
+    scan_parser.add_argument(
+        "--config",
+        help="Path to a .mergeguard.yml config file. Defaults to .mergeguard.yml in the current directory.",
+    )
     scan_parser.set_defaults(func=run_scan)
 
     return parser
@@ -46,7 +51,8 @@ def run_scan(args: argparse.Namespace) -> int:
     diff_text = _read_file(args.diff)
     description = _read_file(args.description)
 
-    report = MergeGuardEngine().scan(diff_text, description)
+    config = load_config(args.config)
+    report = MergeGuardEngine(config=config).scan(diff_text, description)
     renderer = _renderer_for(args.format)
     print(renderer(report), end="")
     return 0
@@ -64,6 +70,9 @@ def main(argv: Optional[list[str]] = None) -> int:
         return args.func(args)
     except FileNotFoundError as exc:
         print(f"mergeguard: file not found: {exc.filename}", file=sys.stderr)
+        return 2
+    except ConfigError as exc:
+        print(f"mergeguard: invalid config: {exc}", file=sys.stderr)
         return 2
 
 
