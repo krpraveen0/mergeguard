@@ -257,3 +257,11 @@ uv run pytest
 uv run mergeguard scan --diff examples/sample-risky.diff --description examples/pr-description-weak.md --format markdown
 uv run mergeguard scan --diff examples/sample-safe.diff --description examples/pr-description-good.md --format json
 ```
+
+## Release
+
+Release readiness and publishing steps for `v0.1.0` are documented in [`RELEASE.md`](RELEASE.md).
+
+## License
+
+MergeGuard is licensed under the Apache License, Version 2.0. See [`LICENSE`](LICENSE).
