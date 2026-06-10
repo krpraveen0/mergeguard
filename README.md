@@ -117,6 +117,8 @@ Supported output formats:
 
 The `markdown` format is designed for GitHub PR comments. It includes a compact status summary, diff stats, category findings, and readable inline file paths.
 
+For a copy-paste friendly walk-through, including install options, safe and risky examples, JSON output, config usage, and scanning your own branch, see [`EXAMPLES.md`](EXAMPLES.md).
+
 ## Sample Output
 
 The full sample report is available at [`examples/sample-report.md`](examples/sample-report.md).
@@ -274,6 +276,8 @@ uv run pytest
 uv run mergeguard scan --diff examples/sample-risky.diff --description examples/pr-description-weak.md --format markdown
 uv run mergeguard scan --diff examples/sample-safe.diff --description examples/pr-description-good.md --format json
 ```
+
+See [`EXAMPLES.md`](EXAMPLES.md) for end-user examples that should stay in sync with these sample files.
 
 ## Release
 
