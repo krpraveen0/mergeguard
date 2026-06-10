@@ -22,7 +22,7 @@ Release metadata lives in `pyproject.toml`.
 
 Before publishing, verify:
 
-- `project.name` is `mergeguard`
+- `project.name` is `mergeguard-cli`
 - `project.version` is `0.1.0`
 - `mergeguard.__version__` is `0.1.0`
 - `requires-python` is `>=3.14`
@@ -74,8 +74,8 @@ uv build --python 3.14.5 --out-dir dist --clear
 Expected artifacts:
 
 ```text
-dist/mergeguard-0.1.0.tar.gz
-dist/mergeguard-0.1.0-py3-none-any.whl
+dist/mergeguard_cli-0.1.0.tar.gz
+dist/mergeguard_cli-0.1.0-py3-none-any.whl
 ```
 
 Dry-run the upload command before publishing:
@@ -94,7 +94,7 @@ Create a TestPyPI API token and provide it through `UV_PUBLISH_TOKEN`. Do not co
 UV_PUBLISH_TOKEN="pypi-..." \
 uv publish \
   --publish-url https://test.pypi.org/legacy/ \
-  --check-url https://test.pypi.org/simple/mergeguard/ \
+  --check-url https://test.pypi.org/simple/mergeguard-cli/ \
   dist/*
 ```
 
@@ -106,7 +106,7 @@ uv pip install \
   --python /tmp/mergeguard-testpypi/bin/python \
   --index-url https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  mergeguard==0.1.0
+  mergeguard-cli==0.1.0
 /tmp/mergeguard-testpypi/bin/mergeguard --help
 ```
 
@@ -122,7 +122,7 @@ Create a PyPI API token and provide it through `UV_PUBLISH_TOKEN`. Do not commit
 UV_PUBLISH_TOKEN="pypi-..." \
 uv publish \
   --publish-url https://upload.pypi.org/legacy/ \
-  --check-url https://pypi.org/simple/mergeguard/ \
+  --check-url https://pypi.org/simple/mergeguard-cli/ \
   dist/*
 ```
 
@@ -130,7 +130,7 @@ Validate installation from PyPI in a fresh environment:
 
 ```bash
 uv venv /tmp/mergeguard-pypi --python 3.14.5
-uv pip install --python /tmp/mergeguard-pypi/bin/python mergeguard==0.1.0
+uv pip install --python /tmp/mergeguard-pypi/bin/python mergeguard-cli==0.1.0
 /tmp/mergeguard-pypi/bin/mergeguard --help
 ```
 
@@ -139,6 +139,7 @@ uv pip install --python /tmp/mergeguard-pypi/bin/python mergeguard==0.1.0
 Pre-release:
 
 - [ ] Confirm `master` is clean and synced with `origin/master`
+- [ ] Confirm `pyproject.toml` distribution name is `mergeguard-cli`
 - [ ] Confirm `pyproject.toml` version is `0.1.0`
 - [ ] Confirm `mergeguard.__version__` is `0.1.0`
 - [ ] Confirm Python requirement is `>=3.14`
@@ -157,14 +158,14 @@ Build:
 TestPyPI:
 
 - [ ] Upload to TestPyPI
-- [ ] Install `mergeguard==0.1.0` from TestPyPI in a fresh environment
+- [ ] Install `mergeguard-cli==0.1.0` from TestPyPI in a fresh environment
 - [ ] Run `mergeguard --help`
 - [ ] Run at least one sample scan from an installed package
 
 PyPI:
 
 - [ ] Upload to PyPI
-- [ ] Install `mergeguard==0.1.0` from PyPI in a fresh environment
+- [ ] Install `mergeguard-cli==0.1.0` from PyPI in a fresh environment
 - [ ] Run `mergeguard --help`
 - [ ] Run at least one sample scan from an installed package
 

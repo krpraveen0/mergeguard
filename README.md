@@ -48,6 +48,12 @@ uv sync --dev
 Plain `pip` installation is also supported on Python 3.14+:
 
 ```bash
+pip install mergeguard-cli
+```
+
+For editable local development from this repository:
+
+```bash
 pip install -e .
 ```
 
