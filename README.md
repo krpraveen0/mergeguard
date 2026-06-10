@@ -51,6 +51,17 @@ Plain `pip` installation is also supported on Python 3.14+:
 pip install mergeguard-cli
 ```
 
+On macOS, Homebrew installation is available through this repository as a tap:
+
+```bash
+brew tap krpraveen0/mergeguard https://github.com/krpraveen0/mergeguard
+brew trust krpraveen0/mergeguard
+brew install krpraveen0/mergeguard/mergeguard-cli
+```
+
+The package/formula name is `mergeguard-cli`; the installed command is `mergeguard`.
+The misspelled name `mergegaurd-cli` is not available.
+
 For editable local development from this repository:
 
 ```bash
