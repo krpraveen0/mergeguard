@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mergeguard-cli"
-version = "0.1.0"
+version = "0.1.1"
 description = "Deterministic review-readiness checks for AI-assisted pull requests."
 readme = "README.md"
 license = "Apache-2.0"
@@ -34,6 +34,7 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/krpraveen0/mergeguard"
+Documentation = "https://github.com/krpraveen0/mergeguard/blob/master/EXAMPLES.md"
 Repository = "https://github.com/krpraveen0/mergeguard"
 Issues = "https://github.com/krpraveen0/mergeguard/issues"
 Releases = "https://github.com/krpraveen0/mergeguard/releases"
