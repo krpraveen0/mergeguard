@@ -55,7 +55,8 @@ On macOS, Homebrew installation is available through this repository as a tap:
 
 ```bash
 brew tap krpraveen0/mergeguard https://github.com/krpraveen0/mergeguard
-brew install mergeguard-cli
+brew trust krpraveen0/mergeguard
+brew install krpraveen0/mergeguard/mergeguard-cli
 ```
 
 The package/formula name is `mergeguard-cli`; the installed command is `mergeguard`.
