@@ -3,7 +3,7 @@ class MergeguardCli < Formula
 
   desc "Deterministic review-readiness checks for AI-assisted pull requests"
   homepage "https://github.com/krpraveen0/mergeguard"
-  url "https://files.pythonhosted.org/packages/source/m/mergeguard_cli/mergeguard_cli-0.1.0.tar.gz"
+  url "https://files.pythonhosted.org/packages/b0/93/6640567ec6688462f0f7b52d93711827226042fe89f7345c4d078d7eae01/mergeguard_cli-0.1.0.tar.gz"
   sha256 "6bcebb09f0885b88b7dbbf6db5d07cadea911598f9554eb4fef0df9d10baba31"
   license "Apache-2.0"
 
