@@ -1,0 +1,4 @@
+include EXAMPLES.md
+include README.md
+include RELEASE.md
+recursive-include examples *.diff *.md *.yml

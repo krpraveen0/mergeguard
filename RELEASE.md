@@ -1,12 +1,12 @@
-# Release Readiness: v0.1.0
+# Release Readiness: v0.1.1
 
-This document is the release runbook for publishing MergeGuard `v0.1.0`.
+This document is the release runbook for publishing MergeGuard `v0.1.1`.
 
 MergeGuard is a Python 3.14+ CLI package. The release should be built from a clean `master` checkout and published only after TestPyPI validation succeeds.
 
 ## Release Scope
 
-Version `0.1.0` includes:
+Version `0.1.1` includes:
 
 - `mergeguard scan`
 - Deterministic MERGE rule engine
@@ -14,6 +14,7 @@ Version `0.1.0` includes:
 - `.mergeguard.yml` configuration support
 - Text, Markdown, and JSON renderers
 - Example diffs, descriptions, config, and sample report
+- Step-by-step usage documentation in `EXAMPLES.md`
 - Pytest coverage for parser, engine, config, renderers, and CLI
 
 ## Package Metadata
@@ -23,11 +24,11 @@ Release metadata lives in `pyproject.toml`.
 Before publishing, verify:
 
 - `project.name` is `mergeguard-cli`
-- `project.version` is `0.1.0`
-- `mergeguard.__version__` is `0.1.0`
+- `project.version` is `0.1.1`
+- `mergeguard.__version__` is `0.1.1`
 - `requires-python` is `>=3.14`
 - `README.md` renders as the long description
-- `project.urls` point to the GitHub repository, issues, and releases
+- `project.urls` point to documentation, the GitHub repository, issues, and releases
 - Package discovery includes only `mergeguard*`
 - License metadata is `Apache-2.0`
 - `LICENSE` contains `Copyright 2026 Praveen Kumar`
@@ -74,8 +75,8 @@ uv build --python 3.14.5 --out-dir dist --clear
 Expected artifacts:
 
 ```text
-dist/mergeguard_cli-0.1.0.tar.gz
-dist/mergeguard_cli-0.1.0-py3-none-any.whl
+dist/mergeguard_cli-0.1.1.tar.gz
+dist/mergeguard_cli-0.1.1-py3-none-any.whl
 ```
 
 Dry-run the upload command before publishing:
@@ -127,7 +128,7 @@ uv pip install \
   --python /tmp/mergeguard-testpypi/bin/python \
   --index-url https://test.pypi.org/simple/ \
   --extra-index-url https://pypi.org/simple/ \
-  mergeguard-cli==0.1.0
+  mergeguard-cli==0.1.1
 /tmp/mergeguard-testpypi/bin/mergeguard --help
 ```
 
@@ -151,7 +152,7 @@ Validate installation from PyPI in a fresh environment:
 
 ```bash
 uv venv /tmp/mergeguard-pypi --python 3.14.5
-uv pip install --python /tmp/mergeguard-pypi/bin/python mergeguard-cli==0.1.0
+uv pip install --python /tmp/mergeguard-pypi/bin/python mergeguard-cli==0.1.1
 /tmp/mergeguard-pypi/bin/mergeguard --help
 ```
 
@@ -161,8 +162,8 @@ Pre-release:
 
 - [ ] Confirm `master` is clean and synced with `origin/master`
 - [ ] Confirm `pyproject.toml` distribution name is `mergeguard-cli`
-- [ ] Confirm `pyproject.toml` version is `0.1.0`
-- [ ] Confirm `mergeguard.__version__` is `0.1.0`
+- [ ] Confirm `pyproject.toml` version is `0.1.1`
+- [ ] Confirm `mergeguard.__version__` is `0.1.1`
 - [ ] Confirm Python requirement is `>=3.14`
 - [ ] Confirm Apache-2.0 license metadata and copyright line
 - [ ] Run `uv run --python 3.14.5 pytest`
@@ -179,20 +180,20 @@ Build:
 TestPyPI:
 
 - [ ] Upload to TestPyPI
-- [ ] Install `mergeguard-cli==0.1.0` from TestPyPI in a fresh environment
+- [ ] Install `mergeguard-cli==0.1.1` from TestPyPI in a fresh environment
 - [ ] Run `mergeguard --help`
 - [ ] Run at least one sample scan from an installed package
 
 PyPI:
 
 - [ ] Upload to PyPI
-- [ ] Install `mergeguard-cli==0.1.0` from PyPI in a fresh environment
+- [ ] Install `mergeguard-cli==0.1.1` from PyPI in a fresh environment
 - [ ] Run `mergeguard --help`
 - [ ] Run at least one sample scan from an installed package
 
 GitHub:
 
-- [ ] Tag the release as `v0.1.0`
+- [ ] Tag the release as `v0.1.1`
 - [ ] Create GitHub release notes
 - [ ] Link PyPI package from the GitHub release
 - [ ] Close or update any release tracking issues

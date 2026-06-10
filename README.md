@@ -117,7 +117,7 @@ Supported output formats:
 
 The `markdown` format is designed for GitHub PR comments. It includes a compact status summary, diff stats, category findings, and readable inline file paths.
 
-For a copy-paste friendly walk-through, including install options, safe and risky examples, JSON output, config usage, and scanning your own branch, see [`EXAMPLES.md`](EXAMPLES.md).
+For a copy-paste friendly walk-through, including install options, safe and risky examples, JSON output, config usage, and scanning your own branch, see [`EXAMPLES.md`](EXAMPLES.md). The same examples are linked from the package metadata as the published documentation: <https://github.com/krpraveen0/mergeguard/blob/master/EXAMPLES.md>.
 
 ## Sample Output
 
@@ -281,7 +281,7 @@ See [`EXAMPLES.md`](EXAMPLES.md) for end-user examples that should stay in sync 
 
 ## Release
 
-Release readiness and publishing steps for `v0.1.0` are documented in [`RELEASE.md`](RELEASE.md).
+Release readiness and publishing steps for `v0.1.1` are documented in [`RELEASE.md`](RELEASE.md).
 
 ## License
 
