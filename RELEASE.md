@@ -84,6 +84,26 @@ Dry-run the upload command before publishing:
 uv publish --dry-run --trusted-publishing never dist/*
 ```
 
+## Homebrew Formula Notes
+
+The Homebrew formula lives in [`Formula/mergeguard-cli.rb`](Formula/mergeguard-cli.rb) and installs the published PyPI source distribution into a Homebrew-managed Python 3.14 virtual environment.
+
+For each release:
+
+- Update the formula `url` to the new PyPI source distribution
+- Update the formula `sha256` from the released source distribution
+- Keep the formula name as `mergeguard-cli`
+- Keep the installed command as `mergeguard`
+- Verify the formula through the tap with `brew install --build-from-source krpraveen0/mergeguard/mergeguard-cli`
+- Run `brew test krpraveen0/mergeguard/mergeguard-cli`
+
+Users can install from this repository as a tap:
+
+```bash
+brew tap krpraveen0/mergeguard https://github.com/krpraveen0/mergeguard
+brew install mergeguard-cli
+```
+
 ## TestPyPI Notes
 
 Use TestPyPI before publishing to PyPI.
